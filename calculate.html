@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .name_block{
+            margin-bottom: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="app">
+            <ul>
+                <li v-for="mayor in mayors" class="row offset-3 name_block">
+                    <h4 class=" col-6">
+                        {{ mayor.name }}
+                    </h4>
+                    <button v-on:click="++mayor.votes" type="submit" class="btn btn-primary col-3">Количество голосов: {{ mayor.votes }}</button>
+                </li>
+            </ul>
+            <p>Победитель на данный момент: <strong>{{mayors[win].name}}</strong></p>
+            <button v-on:click="null_result()" class="btn btn-primary">Обнулить</button>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+
+    new Vue ({
+        el: '#app',
+        data: {
+            rating: 0,
+            mayors: [
+                {name: "Раст Коул", votes: 0},
+                {name: "Джокер", votes: 0},
+                {name: "Тайлер Дерден", votes: 0},
+                {name: "Нигган", votes: 0},
+            ]
+        },
+
+        computed: {
+            win: function () {
+                let a = this.rating;
+
+                this.mayors.forEach(function (item, index, arr ) {
+                    if(item.votes > arr[a].votes){
+                        a = index;
+                    }
+                });
+                this.set_rating(a);
+                return this.rating;
+            }
+        },
+        methods: {
+            set_rating: function (index) {
+                this.rating = index;
+            },
+            null_result: function() {
+                this.mayors.forEach(function (item, index) {
+                    item.votes = 0;
+                });
+            }
+        }
+    });
+    function ss (ss) {
+        console.log(this, ss);
+    }
+    a = {
+        name: "sss"
+    }
+
+    ss.call(a, "name", 'sf');
+</script>
+</body>
+</html>
