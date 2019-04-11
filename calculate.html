@@ -25,6 +25,9 @@
             </ul>
             <p>Победитель на данный момент: <strong>{{mayors[win].name}}</strong></p>
             <button v-on:click="null_result()" class="btn btn-primary">Обнулить</button>
+            <pre>
+                {{$data}}
+            </pre>
         </div>
     </div>
 
@@ -68,14 +71,6 @@
             }
         }
     });
-    function ss (ss) {
-        console.log(this, ss);
-    }
-    a = {
-        name: "sss"
-    }
-
-    ss.call(a, "name", 'sf');
 </script>
 </body>
 </html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Фильтр</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .item_friend{
+            margin-bottom: 6px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="app">
+        <div class="row">
+            <ol class="col-6">
+                <h3>Сотртировка по возрастанию</h3>
+                <li v-for="(item, key) in sort_age" key:="key">
+
+                    <b>Возраст</b>: {{ item.age  }}, <br /><b>Имя</b>: {{ item.name }}
+                </li>
+            </ol>
+            <ol class="col-6">
+                <h3>Сотртировка по возрасту</h3>
+                <li v-for="(item, key) in set_item_sotr" key:="key" class="item_friend">
+                    <b>Возраст</b>: {{ item.age  }}, <b>Имя</b>: {{ item.name }}
+                </li>
+            </ol>
+        </div>
+        <label>
+            <span><b>Введите возраст до:</b></span>
+            <input v-model="sort_num" type="number">
+        </label>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                sort_num: '',
+                friend: [
+                    {
+                        name: "Максим",
+                        age: "25"
+                    },
+                    {
+
+                        name: "Руслан",
+                        age: "24"
+                    },
+                    {
+                        name: "Никита",
+                        age: "23"
+                    },
+                    {
+                        name: "Артем",
+                        age: "22"
+                    },
+                    {
+                        name: "Роман",
+                        age: "21"
+                    },
+                    {
+                        name: "Сергей",
+                        age: 23,
+                    }
+                ],
+            },
+            computed: {
+                set_item_sotr: function (value) {
+                    return this.friend.filter(function(item, i) {
+                        return this.friend[i].age > this.sort_num;
+                    }, this)
+                },
+                sort_age: function() {
+                    return this.friend.sort(function (a, b) {
+                        return a.age - b.age;
+                    });
+                }
+            },
+        });
+
+    </script>
+</body>
+</html>
